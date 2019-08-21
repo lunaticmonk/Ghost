@@ -6,6 +6,13 @@ function getExcerpt(html, truncateOptions) {
     var excerpt = html.replace(/<a href="#fn.*?rel="footnote">.*?<\/a>/gi, '');
     excerpt = excerpt.replace(/<div class="footnotes"><ol>.*?<\/ol><\/div>/, '');
     // Strip other html
+
+    const whiteSpaceExcerptRegex = new Array(/<\/p>/g);
+
+    for (const regex of whiteSpaceExcerptRegex) {
+        excerpt = excerpt.replace(regex, ' ');
+    }
+
     excerpt = excerpt.replace(/<\/?[^>]+>/gi, '');
     excerpt = excerpt.replace(/(\r\n|\n|\r)+/gm, ' ');
 
